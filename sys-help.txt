@@ -1,0 +1,74 @@
+### USEFUL COMMANDS ###
+
+
+#######################
+# WIFI
+
+# Nearby networks: nmcli dev wifi list
+# With flags: nmcli -f ACTIVE,SSID,SECURITY,BSSID,CHAN,SIGNAL dev wifi list
+
+# Connect: sudo nmcli dev wifi connect "SSID"
+# Connect to a specific access point: 
+sudo nmcli dev wifi connect "SSID" bssid XX:XX:XX:XX:XX:XX
+# Show trusted connections: nmcli con show
+
+# Delete connection and reconnect:
+sudo nmcli con delete "SSID" OR nmcli con delete uuid ...
+sudo nmcli dev wifi rescan
+# then run Connect again.
+
+# Check DNS: nmcli dev show wlan0 | grep DNS
+# Try ping 1: ping -c 3 1.1.1.1
+# Try ping 2: ping -c debian.org
+# Both work: Connection fine; 1 work only: DNS problem, names not resolving; Both fail: Lost connection
+
+# Quick reconnect: nmcli con down "Name" && nmcli con up "Name"
+# Restart: sudo systemctl restart NetworkManager
+
+# Create fresh connection profile restricted to 2.4G w specific bssid and no autoconnect:
+sudo nmcli con add type wifi ifname wlan0 con-name "NewName" ssid "<SSID>" \
+  802-11-wireless.band bg \
+  802-11-wireless.bssid XX:XX:XX:XX:XX:XX \
+  connection.autoconnect no
+sudo nmcli con up "NewName"
+# to restrict to 5GHz use 'a' instead of 'bg'
+# Enable autocon: nmcli con mod "NewName" connection.autoconnect yes
+
+# Check log while connecting: journalctl -u wpa_supplicant -f
+
+#######################
+# BLUETOOTH
+
+bluetoothctl
+>> power on
+>> agent on
+>> scan on
+>> pair XX
+>> trust XX
+>> connect XX
+>> scan off
+>> exit
+
+# Show devices: bluetoothctl devices (Paired/Trusted/Connected)
+# Quick scan: bluetoothctl --timeout 10 scan on
+# If already paired/trusted: bluetoothctl connect XX
+# Trusted devices autoconnects soon as they're on.
+
+# Checks: bluetoothctl info / systemctl status bluetooth
+# Restart: sudo systemctl restart bluetooth
+
+#######################
+# AUDIO
+
+# Audio status: wpctl status
+# Set volume: wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1
+
+#######################
+# FIREFOX
+
+# Set size whole (in browser): layout.css.devPixelsPerPx from about:config
+
+#######################
+# CHROME
+
+# Set size whole: --force-device-scale-factor=0.5 in /etc/chromium.d/custom-flags 

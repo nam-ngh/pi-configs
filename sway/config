@@ -1,0 +1,75 @@
+# SWAY CONFIGS
+
+# APPEARANCE
+default_border pixel 3
+hide_edge_borders smart
+gaps inner 3
+gaps outer 2
+seat * xcursor_theme default 18
+
+client.focused          #00e5c8 #00e5c8 #00e5c8 #00e5c8 #00e5c8
+client.focused_inactive #00000000 #00000000 #00000000 #00000000 #00000000
+client.unfocused        #00000000 #00000000 #00000000 #00000000 #00000000
+
+# KEY BINDS
+set $mod Mod4
+bindsym $mod+Return exec foot
+bindsym $mod+Space exec fuzzel
+bindsym $mod+Shift+e exit
+bindsym $mod+Shift+r reload
+bindsym $mod+escape kill
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+Ctrl+h resize shrink width 5px
+bindsym $mod+Ctrl+l resize grow width 5px
+bindsym $mod+Ctrl+k resize shrink height 5px
+bindsym $mod+Ctrl+j resize grow height 5px
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+bindsym Mod1+Tab focus next
+bindsym Mod1+Shift+Tab focus prev
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+
+bindsym $mod+Shift+1 move container to workspace 1; workspace 1
+bindsym $mod+Shift+2 move container to workspace 2; workspace 2
+bindsym $mod+Shift+3 move container to workspace 3; workspace 3
+bindsym $mod+Shift+4 move container to workspace 4; workspace 4
+bindsym $mod+Shift+5 move container to workspace 5; workspace 5
+bindsym $mod+Shift+6 move container to workspace 6; workspace 6
+
+# PERIPHERALS
+output card1-HDMI-A-1
+output * scale 1.8
+output * bg ~/Downloads/pxfuel.jpg fill
+
+# Map any capslock to escape
+input type:keyboard {
+    xkb_options caps:escape,shift:both_capslock
+}
+bindsym $mod+Shift+End exec foot -e bash -c 'read -p "Shutdown?" a && [ "$a" = y ] && systemctl poweroff'
+
+# AUDIO
+bindsym $mod+period exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym $mod+comma exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym $mod+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+bindsym $mod+backslash exec playerctl play-pause
+bindsym $mod+bracketleft exec playerctl previous
+bindsym $mod+bracketright exec playerctl next
