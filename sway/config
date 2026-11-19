@@ -17,7 +17,7 @@ bindsym $mod+Return exec foot
 bindsym $mod+Space exec fuzzel
 bindsym $mod+Shift+e exit
 bindsym $mod+Shift+r reload
-bindsym $mod+escape kill
+bindsym $mod+BackSpace kill
 
 bindsym $mod+b splith
 bindsym $mod+v splitv
