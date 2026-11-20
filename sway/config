@@ -59,6 +59,10 @@ output card1-HDMI-A-1
 output * scale 1.8
 output * bg ~/Downloads/pxfuel.jpg fill
 
+input type:pointer {
+    accel_profile "adaptive"
+    pointer_accel -1
+}
 # Map any capslock to escape
 input type:keyboard {
     xkb_options caps:escape,shift:both_capslock
