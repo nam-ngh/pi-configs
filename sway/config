@@ -24,8 +24,8 @@ bindsym $mod+v splitv
 
 bindsym $mod+Ctrl+h resize shrink width 5px
 bindsym $mod+Ctrl+l resize grow width 5px
-bindsym $mod+Ctrl+k resize shrink height 5px
-bindsym $mod+Ctrl+j resize grow height 5px
+bindsym $mod+Ctrl+j resize shrink height 5px
+bindsym $mod+Ctrl+k resize grow height 5px
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
