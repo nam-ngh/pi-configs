@@ -6,6 +6,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- ignore version support warning from python lsp
+local notify = vim.notify
+vim.notify = function(msg, ...)
+  if type(msg) == "string" and msg:match("nvim%-lspconfig support for Nvim 0.10") then
+    return
+  end
+  return notify(msg, ...)
+end
+
 require("lazy").setup({
     {
         "navarasu/onedark.nvim",
